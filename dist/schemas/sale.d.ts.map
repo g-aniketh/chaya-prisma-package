@@ -1,0 +1,1 @@
+{"version":3,"file":"sale.d.ts","sourceRoot":"","sources":["../../src/schemas/sale.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,CAAC,EAAE,MAAM,KAAK,CAAC;AAExB,eAAO,MAAM,oBAAoB;;;;;;;;;;;;EAY/B,CAAC;AACH,MAAM,MAAM,oBAAoB,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,oBAAoB,CAAC,CAAC;AAExE,eAAO,MAAM,gBAAgB;;;;;;;;;;;;;;;EAa3B,CAAC;AACH,MAAM,MAAM,eAAe,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,gBAAgB,CAAC,CAAC"}

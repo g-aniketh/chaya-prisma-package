@@ -1,0 +1,43 @@
+{
+  "name": "@fyzanshaik/chaya-prisma-package",
+  "version": "1.0.3",
+  "description": "A shared Prisma package for database schema, types, and reusable Zod validation schemas.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublishOnly": "pnpm run db:generate && pnpm run build",
+    "build": "tsc --build && pnpm db:generate",
+    "dev": "tsc --watch",
+    "lint": "eslint . --ext .ts,.tsx",
+    "db:generate": "echo 'Running prisma generate' && prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio",
+    "db:seed": "ts-node ./prisma/seed.ts",
+    "postinstall": "node postinstall.js"
+  },
+  "files": [
+    "dist",
+    "prisma",
+    ".prisma",
+    "postinstall.js"
+  ],
+  "keywords": [
+    "prisma",
+    "database",
+    "zod",
+    "validation",
+    "typescript",
+    "shared package"
+  ],
+  "author": "Faizan Shaik ",
+  "license": "ISC",
+  "packageManager": "pnpm@10.5.2",
+  "dependencies": {
+    "@prisma/client": "6.8.2",
+    "typescript": "^5.8.3",
+    "zod": "^3.25.7"
+  },
+  "devDependencies": {
+    "prisma": "^6.8.2"
+  }
+}
