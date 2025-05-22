@@ -8,13 +8,17 @@ exports.createProcurementSchema = zod_1.z.object({
     procuredForm: zod_1.z.string().min(1, "Procured form is required"),
     speciality: zod_1.z.string().min(1, "Speciality is required"),
     quantity: zod_1.z.number().positive("Quantity must be a positive number"),
-    date: zod_1.z.string().transform((str) => new Date(str)),
+    date: zod_1.z.string().transform(str => new Date(str)),
     time: zod_1.z
         .string()
         .regex(/^\d{2}:\d{2}:\d{2}$/, "Invalid time format (expected HH:mm:ss)"),
-    lotNo: zod_1.z.number().int().min(1, "Lot number must be a positive integer"),
+    lotNo: zod_1.z
+        .number()
+        .int()
+        .min(1, "Lot number must be a positive integer")
+        .max(3, "Only 1, 2, 3 Lot Numbers are allowed"),
     procuredBy: zod_1.z.string().min(1, "Procured by is required"),
-    vehicleNo: zod_1.z.string().min(1, "Vehicle number is required").optional(),
+    vehicleNo: zod_1.z.string().min(1, "Vehicle number is required"),
 });
 exports.updateProcurementSchema = exports.createProcurementSchema
     .partial()
