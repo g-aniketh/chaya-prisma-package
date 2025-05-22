@@ -7,8 +7,73 @@ import {
   Prisma,
 } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import fs from "fs";
+import path from "path";
 
 const prisma = new PrismaClient();
+
+interface SeedDistrictEntry {
+  state: string;
+  stateCode: string;
+  districtCode: string;
+  district: string;
+  headquarters?: string;
+  population?: number;
+  area?: number;
+  density?: number;
+}
+
+interface LocationData {
+  districts: SeedDistrictEntry[];
+}
+
+let indianLocationData: LocationData = { districts: [] };
+try {
+  const jsonPath = path.join(__dirname, "data", "districts.json");
+  const rawData = fs.readFileSync(jsonPath, "utf-8");
+  indianLocationData = JSON.parse(rawData);
+  console.log(
+    `Successfully loaded ${indianLocationData.districts.length} district entries from JSON.`
+  );
+} catch (error) {
+  console.error(
+    "Failed to load districts.json for seeding. Ensure the file exists at 'prisma/data/districts.json'",
+    error
+  );
+  process.exit(1);
+}
+
+const allStatesFromData = Array.from(
+  new Set(indianLocationData.districts.map(d => d.state))
+).sort();
+
+function getRandomStateAndDistrict(): {
+  state: string;
+  district: string;
+  mandal: string;
+  village: string;
+  panchayath: string;
+} {
+  if (indianLocationData.districts.length === 0) {
+    return {
+      state: "Fallback State",
+      district: "Fallback District",
+      mandal: "Fallback Mandal",
+      village: "Fallback Village",
+      panchayath: "Fallback GP",
+    };
+  }
+
+  const randomEntry = getRandomElement(indianLocationData.districts);
+  const randomSuffix = Math.floor(Math.random() * 100) + 1;
+  return {
+    state: randomEntry.state,
+    district: randomEntry.district,
+    mandal: `${randomEntry.district} Mandal ${randomSuffix}`,
+    village: `${randomEntry.district} Village ${randomSuffix}`,
+    panchayath: `${randomEntry.district} GP ${randomSuffix}`,
+  };
+}
 
 async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, 12);
@@ -37,16 +102,6 @@ const lastNames = [
   "Gupta",
   "Rao",
 ];
-const villages = [
-  "Ramapuram",
-  "Krishnanagar",
-  "Sitapur",
-  "Devinagar",
-  "Gandhipuram",
-];
-const mandals = ["Mandal A", "Mandal B", "Mandal C", "Mandal D"];
-const districts = ["District X", "District Y", "District Z"];
-const states = ["Andhra Pradesh", "Telangana", "Karnataka", "Tamil Nadu"];
 const communities = ["BC", "OC", "SC", "ST", "Minority"];
 const bankNames = [
   "State Bank of India",
@@ -201,6 +256,7 @@ async function main() {
       lastNames
     )}`;
     const selectedBankName = getRandomElement(bankNames);
+    const locationDetails = getRandomStateAndDistrict();
 
     const farmerData: Prisma.FarmerCreateInput = {
       surveyNumber: generateSeedSurveyNumber(),
@@ -209,11 +265,11 @@ async function main() {
       gender: getRandomElement(Object.values(Gender)),
       community: getRandomElement(communities),
       aadharNumber: getRandomAadhar(),
-      state: getRandomElement(states),
-      district: getRandomElement(districts),
-      mandal: getRandomElement(mandals),
-      village: getRandomElement(villages),
-      panchayath: `${getRandomElement(villages)} GP`,
+      state: locationDetails.state,
+      district: locationDetails.district,
+      mandal: locationDetails.mandal,
+      village: locationDetails.village,
+      panchayath: locationDetails.panchayath,
       dateOfBirth: dob,
       age: age,
       contactNumber: getRandomPhone(),
@@ -226,9 +282,7 @@ async function main() {
           bankName: selectedBankName,
           branchName: getRandomElement(branchNames),
           accountNumber: getRandomAccountNumber(),
-          address: `${getRandomElement(villages)}, ${getRandomElement(
-            districts
-          )}`,
+          address: `${locationDetails.village}, ${locationDetails.district}`,
           bankCode: selectedBankName.substring(0, 3).toUpperCase(),
         },
       },
@@ -261,7 +315,9 @@ async function main() {
 
     const farmer = await prisma.farmer.create({ data: farmerData });
     createdFarmers.push(farmer);
-    console.log(`Created farmer: ${farmer.name} (ID: ${farmer.id})`);
+    console.log(
+      `Created farmer: ${farmer.name} (State: ${farmer.state}, District: ${farmer.district})`
+    );
   }
 
   const createdProcurements: any[] = [];
@@ -336,7 +392,7 @@ async function main() {
       }
     }
 
-    const p1Date = getRandomDate(2024, 2025);
+    const p1Date = getRandomDate(2024, 2024);
 
     const batchData: Prisma.ProcessingBatchCreateInput = {
       batchCode: generateSeedProcessingBatchCode(batchCrop, batchLotNo, p1Date),
