@@ -10,9 +10,10 @@
     "dev": "tsc --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "db:generate": "echo 'Running prisma generate' && prisma generate",
+    "db:seed": "bun run ./seed.ts",
     "db:migrate": "prisma migrate dev",
+    "db:reset": "prisma migrate reset",
     "db:studio": "prisma studio",
-    "db:seed": "ts-node ./prisma/seed.ts",
     "postinstall": "node postinstall.js"
   },
   "files": [
@@ -38,6 +39,9 @@
     "zod": "^3.25.7"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/node": "^22.15.21",
+    "bcryptjs": "^3.0.2",
     "prisma": "^6.8.2"
   }
 }
