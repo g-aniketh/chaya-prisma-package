@@ -6,13 +6,17 @@ export const createProcurementSchema = z.object({
   procuredForm: z.string().min(1, "Procured form is required"),
   speciality: z.string().min(1, "Speciality is required"),
   quantity: z.number().positive("Quantity must be a positive number"),
-  date: z.string().transform((str) => new Date(str)),
+  date: z.string().transform(str => new Date(str)),
   time: z
     .string()
     .regex(/^\d{2}:\d{2}:\d{2}$/, "Invalid time format (expected HH:mm:ss)"),
-  lotNo: z.number().int().min(1, "Lot number must be a positive integer"),
+  lotNo: z
+    .number()
+    .int()
+    .min(1, "Lot number must be a positive integer")
+    .max(3, "Only 1, 2, 3 Lot Numbers are allowed"),
   procuredBy: z.string().min(1, "Procured by is required"),
-  vehicleNo: z.string().min(1, "Vehicle number is required").optional(),
+  vehicleNo: z.string().min(1, "Vehicle number is required"),
 });
 
 export type CreateProcurementInput = z.infer<typeof createProcurementSchema>;

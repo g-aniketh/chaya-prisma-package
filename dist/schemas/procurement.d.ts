@@ -9,7 +9,7 @@ export declare const createProcurementSchema: z.ZodObject<{
     time: z.ZodString;
     lotNo: z.ZodNumber;
     procuredBy: z.ZodString;
-    vehicleNo: z.ZodOptional<z.ZodString>;
+    vehicleNo: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     date: Date;
     farmerId: number;
@@ -20,7 +20,7 @@ export declare const createProcurementSchema: z.ZodObject<{
     time: string;
     lotNo: number;
     procuredBy: string;
-    vehicleNo?: string | undefined;
+    vehicleNo: string;
 }, {
     date: string;
     farmerId: number;
@@ -31,7 +31,7 @@ export declare const createProcurementSchema: z.ZodObject<{
     time: string;
     lotNo: number;
     procuredBy: string;
-    vehicleNo?: string | undefined;
+    vehicleNo: string;
 }>;
 export type CreateProcurementInput = z.infer<typeof createProcurementSchema>;
 export declare const updateProcurementSchema: z.ZodObject<{
@@ -44,7 +44,7 @@ export declare const updateProcurementSchema: z.ZodObject<{
     time: z.ZodOptional<z.ZodString>;
     lotNo: z.ZodOptional<z.ZodNumber>;
     procuredBy: z.ZodOptional<z.ZodString>;
-    vehicleNo: z.ZodOptional<z.ZodOptional<z.ZodString>>;
+    vehicleNo: z.ZodOptional<z.ZodString>;
 } & {
     id: z.ZodNumber;
 }, "strip", z.ZodTypeAny, {

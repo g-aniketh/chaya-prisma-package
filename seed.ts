@@ -155,6 +155,13 @@ function generateSeedProcessingBatchCode(
   ).padStart(3, "0")}`;
 }
 
+function generateSeedVehicleNumber(): string {
+  return `AP${String(Math.floor(Math.random() * 30) + 1).padStart(
+    2,
+    "0"
+  )}X${String(Math.floor(Math.random() * 9000) + 1000)}`;
+}
+
 async function main() {
   console.log("Start seeding ...");
 
@@ -286,13 +293,7 @@ async function main() {
       time: procurementTime,
       lotNo: lotNumber,
       procuredBy: staffUser.name,
-      vehicleNo:
-        Math.random() > 0.5
-          ? `AP${String(Math.floor(Math.random() * 30) + 1).padStart(
-              2,
-              "0"
-            )}X${String(Math.floor(Math.random() * 9000) + 1000)}`
-          : undefined,
+      vehicleNo: generateSeedVehicleNumber(),
     };
     const procurement = await prisma.procurement.create({
       data: procurementData,
