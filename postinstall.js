@@ -3,7 +3,8 @@ const path = require('path');
 
 try {
   console.log('Running Prisma generate from package postinstall...');
-  execSync(`npx prisma generate --schema=${path.join(__dirname, 'prisma/schema.prisma')}`, {
+  const schemaPath = path.join(__dirname, 'prisma/schema.prisma');
+  execSync(`npx prisma generate --schema="${schemaPath}"`, {
     stdio: 'inherit',
   });
   console.log('Prisma client generated successfully!');
