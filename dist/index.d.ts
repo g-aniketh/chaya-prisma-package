@@ -7,6 +7,8 @@ export * from "./schemas/processingStage";
 export * from "./schemas/sale";
 export * from "@prisma/client";
 export type { Farmer, Procurement, ProcessingBatch, ProcessingStage, Drying, Sale, User, Field, BankDetails, FarmerDocuments, Gender, Relationship, Role, ProcessingStageStatus, } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
-export declare const prisma: PrismaClient<import("@prisma/client").Prisma.PrismaClientOptions, never, import("@prisma/client/runtime/library").DefaultArgs>;
+export { PrismaClient } from "@prisma/client";
+export declare const createPrismaClient: () => any;
+declare let prisma: any;
+export { prisma };
 //# sourceMappingURL=index.d.ts.map

@@ -18,6 +18,9 @@ importers:
         specifier: ^3.25.7
         version: 3.25.7
     devDependencies:
+      '@types/node':
+        specifier: ^24.5.2
+        version: 24.5.2
       prisma:
         specifier: 6.16.2
         version: 6.16.2(typescript@5.8.3)
@@ -56,6 +59,9 @@ packages:
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
+
+  '@types/node@24.5.2':
+    resolution: {integrity: sha512-FYxk1I7wPv3K2XBaoyH2cTnocQEu8AOZ60hPbsyukMPLv5/5qr7V1i8PLHdl6Zf87I+xZXFvPCXYjiTFq+YSDQ==}
 
   c12@3.1.0:
     resolution: {integrity: sha512-uWoS8OU1MEIsOv8p/5a82c3H31LsWVR5qiyXVfBNOzfffjUWtPnhAb4BYI2uG2HfGmZmFjCtui5XNWaps+iFuw==}
@@ -163,6 +169,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@7.12.0:
+    resolution: {integrity: sha512-goOacqME2GYyOZZfb5Lgtu+1IDmAlAEu5xnD3+xTzS10hT0vzpf0SPjkXwAw9Jm+4n/mQGDP3LO8CPbYROeBfQ==}
+
   zod@3.25.7:
     resolution: {integrity: sha512-YGdT1cVRmKkOg6Sq7vY7IkxdphySKnXhaUmFI4r4FcuFVNgpCb9tZfNwXbT6BPjD5oz0nubFsoo9pIqKrDcCvg==}
 
@@ -204,6 +213,10 @@ snapshots:
       '@prisma/debug': 6.16.2
 
   '@standard-schema/spec@1.0.0': {}
+
+  '@types/node@24.5.2':
+    dependencies:
+      undici-types: 7.12.0
 
   c12@3.1.0:
     dependencies:
@@ -307,5 +320,7 @@ snapshots:
   tinyexec@1.0.1: {}
 
   typescript@5.8.3: {}
+
+  undici-types@7.12.0: {}
 
   zod@3.25.7: {}

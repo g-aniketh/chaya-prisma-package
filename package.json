@@ -1,6 +1,6 @@
 {
   "name": "@ankeny/chaya-prisma-package",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A shared Prisma package for database schema, types, and reusable Zod validation schemas.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -38,6 +38,7 @@
     "zod": "^3.25.7"
   },
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "prisma": "6.16.2"
   }
 }

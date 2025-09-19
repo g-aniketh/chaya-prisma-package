@@ -27,5 +27,21 @@ export type {
   ProcessingStageStatus,
 } from "@prisma/client";
 
-import { PrismaClient } from "@prisma/client";
-export const prisma = new PrismaClient();
+// Only export Prisma client for server-side usage
+// This prevents browser bundling issues
+export { PrismaClient } from "@prisma/client";
+
+// Create a function to get prisma instance instead of exporting it directly
+export const createPrismaClient = () => {
+  const { PrismaClient } = require("@prisma/client");
+  return new PrismaClient();
+};
+
+// For backward compatibility, export prisma but only in server environments
+let prisma: any = null;
+if (typeof window === 'undefined') {
+  // Only create prisma client on server side
+  const { PrismaClient } = require("@prisma/client");
+  prisma = new PrismaClient();
+}
+export { prisma };
