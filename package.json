@@ -1,6 +1,6 @@
 {
   "name": "@ankeny/chaya-prisma-package",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "A shared Prisma package for database schema, types, and reusable Zod validation schemas.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
