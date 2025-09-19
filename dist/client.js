@@ -14,8 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.prisma = exports.createPrismaClient = exports.PrismaClient = void 0;
-// Server-side exports - includes Prisma client
+// Client-safe exports - only schemas and types, no Prisma client
 __exportStar(require("./schemas/auth"), exports);
 __exportStar(require("./schemas/farmer"), exports);
 __exportStar(require("./schemas/users"), exports);
@@ -23,23 +22,6 @@ __exportStar(require("./schemas/procurement"), exports);
 __exportStar(require("./schemas/processingBatch"), exports);
 __exportStar(require("./schemas/processingStage"), exports);
 __exportStar(require("./schemas/sale"), exports);
-// Export all Prisma types and models
-__exportStar(require("@prisma/client"), exports);
-// Only export Prisma client for server-side usage
-var client_1 = require("@prisma/client");
-Object.defineProperty(exports, "PrismaClient", { enumerable: true, get: function () { return client_1.PrismaClient; } });
-// Create a function to get prisma instance instead of exporting it directly
-const createPrismaClient = () => {
-    const { PrismaClient } = require("@prisma/client");
-    return new PrismaClient();
-};
-exports.createPrismaClient = createPrismaClient;
-// For backward compatibility, export prisma but only in server environments
-let prisma = null;
-exports.prisma = prisma;
-if (typeof window === 'undefined') {
-    // Only create prisma client on server side
-    const { PrismaClient } = require("@prisma/client");
-    exports.prisma = prisma = new PrismaClient();
-}
-//# sourceMappingURL=index.js.map
+// Export standalone types
+__exportStar(require("./types"), exports);
+//# sourceMappingURL=client.js.map

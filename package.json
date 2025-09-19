@@ -1,9 +1,21 @@
 {
   "name": "@ankeny/chaya-prisma-package",
-  "version": "1.0.8",
+  "version": "1.0.13",
   "description": "A shared Prisma package for database schema, types, and reusable Zod validation schemas.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "require": "./dist/client.js",
+      "types": "./dist/client.d.ts"
+    }
+  },
   "scripts": {
     "prepublishOnly": "pnpm run db:generate && pnpm run build",
     "build": "tsc --build && pnpm db:generate",

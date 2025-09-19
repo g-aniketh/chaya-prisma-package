@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.processingBatchQuerySchema = exports.createProcessingBatchSchema = exports.createProcessingBatchFirstStageSchema = void 0;
 const zod_1 = require("zod");
-const client_1 = require("@prisma/client");
+const types_1 = require("../types");
 exports.createProcessingBatchFirstStageSchema = zod_1.z.object({
     processMethod: zod_1.z.enum(['wet', 'dry'], { required_error: 'Process method is required' }),
     dateOfProcessing: zod_1.z
@@ -18,9 +18,9 @@ exports.createProcessingBatchSchema = zod_1.z.object({
     firstStageDetails: exports.createProcessingBatchFirstStageSchema,
 });
 const queryStatusEnumValues = [
-    client_1.ProcessingStageStatus.IN_PROGRESS,
-    client_1.ProcessingStageStatus.FINISHED,
-    client_1.ProcessingStageStatus.CANCELLED,
+    types_1.ProcessingStageStatus.IN_PROGRESS,
+    types_1.ProcessingStageStatus.FINISHED,
+    types_1.ProcessingStageStatus.CANCELLED,
     'SOLD_OUT',
 ];
 exports.processingBatchQuerySchema = zod_1.z.object({

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ProcessingStageStatus } from '@prisma/client';
+import { ProcessingStageStatus } from '../types';
 
 export const createProcessingBatchFirstStageSchema = z.object({
   processMethod: z.enum(['wet', 'dry'], { required_error: 'Process method is required' }),

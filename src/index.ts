@@ -1,3 +1,4 @@
+// Server-side exports - includes Prisma client
 export * from "./schemas/auth";
 export * from "./schemas/farmer";
 export * from "./schemas/users";
@@ -28,7 +29,6 @@ export type {
 } from "@prisma/client";
 
 // Only export Prisma client for server-side usage
-// This prevents browser bundling issues
 export { PrismaClient } from "@prisma/client";
 
 // Create a function to get prisma instance instead of exporting it directly
