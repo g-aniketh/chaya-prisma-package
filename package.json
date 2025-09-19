@@ -1,6 +1,6 @@
 {
   "name": "@fyzanshaik/chaya-prisma-package",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "A shared Prisma package for database schema, types, and reusable Zod validation schemas.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,11 +33,11 @@
   "license": "ISC",
   "packageManager": "pnpm@10.5.2",
   "dependencies": {
-    "@prisma/client": "6.8.2",
+    "@prisma/client": "6.16.2",
     "typescript": "^5.8.3",
     "zod": "^3.25.7"
   },
   "devDependencies": {
-    "prisma": "^6.8.2"
+    "prisma": "6.16.2"
   }
 }
